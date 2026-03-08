@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CourtMap • Zones d'Impact</title>
+    <title>ZoneTrack</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,9 +12,61 @@
 </head>
 
 <body>
-    <div class="container pb-5">
-        <h2 class="text-center mt-2"><i class="bi bi-activity"></i> CourtMap</h2>
-        <p class="text-center text-muted mb-3">Analyse des zones d’impact • Version EPS ready</p>
+    <div id="landingScreen" class="cover-screen active">
+        <div class="cover-card">
+            <h1>📊 ZoneTrack</h1>
+            <p>Analyse tactile des zones d’impact pour vos séances EPS.</p>
+            <div class="cover-actions">
+                <button type="button" id="startAppBtn" class="cover-btn cover-btn-primary">Démarrer</button>
+                <button type="button" id="openHelpBtn" class="cover-btn cover-btn-secondary">Aide</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="helpScreen" class="cover-screen">
+        <div class="help-card">
+            <div class="help-header">
+                <h2>Guide ZoneTrack</h2>
+                <button type="button" id="backToLandingBtn" class="cover-btn cover-btn-secondary small">Retour</button>
+            </div>
+            <div class="help-grid">
+                <div class="help-tile help-blue">
+                    <h4>Acteurs</h4>
+                    <p>Choisir Joueurs ou Équipes, saisir prénoms et classe pour identifier les lignes du QR.</p>
+                </div>
+                <div class="help-tile help-green">
+                    <h4>Sport</h4>
+                    <p>Badminton, Tennis de table ou Pickleball : même terrain, contexte différent.</p>
+                </div>
+                <div class="help-tile help-amber">
+                    <h4>Type de terrain</h4>
+                    <p>Sélectionner 3 zones gauche/droite, avant/arrière ou 9 zones coins.</p>
+                </div>
+                <div class="help-tile help-cyan">
+                    <h4>Impacts</h4>
+                    <p>Taper sur le terrain pour placer un impact, les scores et stats se mettent à jour.</p>
+                </div>
+                <div class="help-tile help-purple">
+                    <h4>Heatmap</h4>
+                    <p>Activer ou non la heatmap pour visualiser les zones les plus jouées.</p>
+                </div>
+                <div class="help-tile help-grey">
+                    <h4>QR ScanProf</h4>
+                    <p>Générer le QR depuis Bilan, scanner dans ScanProf pour enregistrer les deux acteurs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="appShell" class="hidden">
+        <div class="container pb-5">
+            <div class="app-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mt-2">📊 ZoneTrack</h2>
+                    <p class="text-muted mb-3">Analyse des zones d’impact • Version EPS ready</p>
+                </div>
+                <button type="button" id="backHomeBtn" class="home-link btn btn-sm btn-outline-light">Accueil</button>
+            </div>
 
         <ul class="nav nav-tabs" id="appTabs" role="tablist">
             <li class="nav-item flex-fill text-center" role="presentation">
@@ -145,7 +197,7 @@
                 </div>
                 <div class="row g-3 justify-content-center mt-4">
                     <div class="col-md-6 col-lg-4 text-center">
-                        <button id="showQRBtn" class="btn-qr-scanprof">
+                        <button type="button" id="showQRBtn" class="btn-qr-scanprof">
                             <i class="bi bi-qr-code display-6"></i>
                             <span>QR Code ScanProf</span>
                         </button>
@@ -180,6 +232,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>

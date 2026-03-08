@@ -119,6 +119,13 @@ const els = {
     p2Name: document.getElementById('p2Name'),
     obsName: document.getElementById('obsName'),
     heatmapToggle: document.getElementById('toggle-heatmap'),
+    startAppBtn: document.getElementById('startAppBtn'),
+    openHelpBtn: document.getElementById('openHelpBtn'),
+    backToLandingBtn: document.getElementById('backToLandingBtn'),
+    backHomeBtn: document.getElementById('backHomeBtn'),
+    landingScreen: document.getElementById('landingScreen'),
+    helpScreen: document.getElementById('helpScreen'),
+    appShell: document.getElementById('appShell'),
     previewContainer: document.getElementById('preview-container'),
     gameContainer: document.getElementById('game-container'),
     dashName1: document.getElementById('dashName1'),
@@ -161,6 +168,7 @@ function init() {
     renderCourts();
     updateDashboard();
     initCharts();
+    attachScreenEvents();
 }
 
 document.addEventListener('DOMContentLoaded', init);
@@ -352,6 +360,50 @@ function attachDefaultInputClearing(input, stateKey) {
             }
         }
     });
+}
+
+function attachScreenEvents() {
+    if (els.startAppBtn) {
+        els.startAppBtn.addEventListener('click', showAppScreen);
+    }
+    if (els.openHelpBtn) {
+        els.openHelpBtn.addEventListener('click', showHelpScreen);
+    }
+    if (els.backToLandingBtn) {
+        els.backToLandingBtn.addEventListener('click', showLandingScreen);
+    }
+    if (els.backHomeBtn) {
+        els.backHomeBtn.addEventListener('click', showLandingScreen);
+    }
+}
+
+function showLandingScreen() {
+    toggleScreens('landing');
+}
+
+function showHelpScreen() {
+    toggleScreens('help');
+}
+
+function showAppScreen() {
+    updateHeatmapToggleState();
+    toggleScreens('app');
+}
+
+function toggleScreens(target) {
+    const { landingScreen, helpScreen, appShell } = els;
+    if (!landingScreen || !helpScreen || !appShell) return;
+    landingScreen.classList.remove('active');
+    helpScreen.classList.remove('active');
+    appShell.classList.add('hidden');
+
+    if (target === 'landing') {
+        landingScreen.classList.add('active');
+    } else if (target === 'help') {
+        helpScreen.classList.add('active');
+    } else if (target === 'app') {
+        appShell.classList.remove('hidden');
+    }
 }
 
 function summarizeZonesForPlayer(playerKey) {
@@ -758,7 +810,7 @@ function buildScanProfPayload() {
     ];
 
     return {
-        appName: 'CourtMap',
+        appName: 'ZoneTrack',
         mode: sportKey,
         date: new Date().toISOString().split('T')[0],
         participants
